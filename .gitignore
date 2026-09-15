@@ -222,3 +222,7 @@ artifacts/*
 !artifacts/.gitkeep
 
 *.db
+
+# Data
+data/*
+!data/.gitkeep
