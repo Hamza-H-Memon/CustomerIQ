@@ -20,3 +20,10 @@ def split_data(df: pd.DataFrame, target_col: str = 'churn', test_size: float = 0
     X = df.drop(columns=[target_col])
     y = df[target_col]
     return train_test_split(X, y, test_size=test_size, random_state=random_state, stratify=y)
+
+def run_pipeline(df: pd.DataFrame):
+    """Run the full preprocessing pipeline: clean, engineer features, encode, and split."""
+    df = drop_unused_columns(df)
+    df = add_zero_balance_flag(df)
+    df = encode_categoricals(df)
+    return split_data(df)
