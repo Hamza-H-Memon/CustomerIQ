@@ -27,3 +27,11 @@ def run_pipeline(df: pd.DataFrame):
     df = add_zero_balance_flag(df)
     df = encode_categoricals(df)
     return split_data(df)
+
+def save_processed_data(X_train, X_test, y_train, y_test, output_dir='../data'):
+    """Save the processed train/test splits to disk as Parquet files."""
+    X_train.to_parquet(f'{output_dir}/X_train.parquet')
+    X_test.to_parquet(f'{output_dir}/X_test.parquet')
+    y_train.to_frame().to_parquet(f'{output_dir}/y_train.parquet')
+    y_test.to_frame().to_parquet(f'{output_dir}/y_test.parquet')
+    print(f"Saved processed data to {output_dir}")
