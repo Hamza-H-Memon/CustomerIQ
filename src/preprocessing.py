@@ -35,3 +35,7 @@ def save_processed_data(X_train, X_test, y_train, y_test, output_dir='../data'):
     y_train.to_frame().to_parquet(f'{output_dir}/y_train.parquet')
     y_test.to_frame().to_parquet(f'{output_dir}/y_test.parquet')
     print(f"Saved processed data to {output_dir}")
+
+def drop_weak_features(df: pd.DataFrame) -> pd.DataFrame:
+    """Drop features consistently shown as weak/noise across EDA, permutation importance, and XGBoost importance."""
+    return df.drop(columns=['estimated_salary', 'credit_score', 'tenure', 'credit_card'])
